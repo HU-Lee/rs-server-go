@@ -41,5 +41,8 @@ func NaverTokenHandler(res http.ResponseWriter, req *http.Request) {
 	if tok_req.State == naver.State && tok_res.IsAuth && postgres.FindUserByNaverId(tok_res.Id) < 0 {
 		postgres.InsertUser(tok_res)
 	}
+
+	tok_res.Role = postgres.FindRoleByNaverId(tok_res.Id)
+
 	json.NewEncoder(res).Encode(tok_res)
 }

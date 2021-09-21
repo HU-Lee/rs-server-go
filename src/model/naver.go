@@ -19,6 +19,7 @@ type TokenResponse struct {
 	Name        string `json:"name"`
 	Email       string `json:"email"`
 	IsAuth      bool   `json:"isAuth"`
+	Role        int    `json:"role"`
 }
 
 // 네이버 프로필 요청시 받을 format

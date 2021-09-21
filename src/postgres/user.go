@@ -77,3 +77,24 @@ func FindUserByNaverId(naverid string) int {
 
 	return -1
 }
+
+func FindRoleByNaverId(naverid string) int {
+	sql := fmt.Sprintf("SELECT user_role FROM public.tb_user WHERE user_naverid='%s'", naverid)
+	rows, err := PostgresDB.Query(sql)
+	if err != nil {
+		return -99
+	}
+
+	defer rows.Close()
+
+	if rows.Next() {
+		var role int
+		err := rows.Scan(&role)
+		if err != nil {
+			return -99
+		}
+		return role
+	}
+
+	return -1
+}
